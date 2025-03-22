@@ -163,7 +163,32 @@ python manage.py runserver
 **Endpoint:** `http://127.0.0.1:8000/api/tags/{id}/`  
 **Method:** `GET`
 
----
+#### 10. Get Snippets by Overview
+**Endpoint:** `http://127.0.0.1:8000/api/snippets/overview/`
+**Method:** `GET`
+**Response:**
+```json
+{
+    "total_snippets": 3,
+    "snippets": [
+        {
+            "id": 1,
+            "title": "Python Basics",
+            "detail_url": "http://127.0.0.1:8000/api/snippets/1/"
+        },
+        {
+            "id": 2,
+            "title": "Django Models",
+            "detail_url": "http://127.0.0.1:8000/api/snippets/2/"
+        },
+        {
+            "id": 3,
+            "title": "React Hooks",
+            "detail_url": "http://127.0.0.1:8000/api/snippets/3/"
+        }
+    ]
+}
+```
 
 ## Test Cases (cURL Examples)
 

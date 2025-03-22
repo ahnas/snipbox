@@ -7,6 +7,8 @@ from .models import Snippet, Tag
 from .serializers import SnippetSerializer, TagSerializer
 from django.contrib.auth import authenticate
 from django.shortcuts import render
+from django.urls import reverse
+
 
 
 
@@ -76,3 +78,20 @@ class TagDetailView(generics.ListAPIView):
 
     def get_queryset(self):
         return Snippet.objects.filter(tags__id=self.kwargs['pk'])
+    
+class SnippetOverviewAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        snippets = Snippet.objects.all()
+        snippet_list = [
+            {
+                "id": snippet.id,
+                "title": snippet.title,
+                "detail_url": request.build_absolute_uri(reverse('snippet-detail', kwargs={'pk': snippet.id}))
+            }
+            for snippet in snippets
+        ]
+        
+        return Response({
+            "total_snippets": snippets.count(),
+            "snippets": snippet_list
+        })

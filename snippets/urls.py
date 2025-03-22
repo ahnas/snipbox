@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import SnippetListCreateView, SnippetDetailView, TagListView, TagDetailView, CustomLoginView
+from .views import SnippetListCreateView, SnippetDetailView, TagListView, TagDetailView, CustomLoginView, SnippetOverviewAPIView
 
 urlpatterns = [
     path('snippets/', SnippetListCreateView.as_view(), name='snippet-list'),
@@ -10,4 +10,6 @@ urlpatterns = [
 
     path('auth/login/', CustomLoginView.as_view(), name='token_obtain_pair'),
     path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('snippets/overview/', SnippetOverviewAPIView.as_view(), name='snippet-overview'),
 ]
