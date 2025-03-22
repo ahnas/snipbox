@@ -106,7 +106,7 @@ python manage.py runserver
 
 ### Snippet APIs
 #### 3. Create Snippet
-**Endpoint:** `/snippets/`  
+**Endpoint:** `http://127.0.0.1:8000/api/snippets/`  
 **Method:** `POST`  
 **Request Body:**
 ```json
