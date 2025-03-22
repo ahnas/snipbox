@@ -1,3 +1,6 @@
+
+![api_testingCC](https://github.com/user-attachments/assets/6a0d6975-2701-4bdf-9850-ecc48da1e529) ![frontend_workingCC](https://github.com/user-attachments/assets/745b06ce-f065-4f5a-be37-810461f9151f)
+
 # SnipBox Backend API
 
 ## Overview
