@@ -3,11 +3,6 @@
 ## Overview
 SnipBox is a short note-saving app that lets users save short text snippets and group them with tags. The backend is built using Django Rest Framework (DRF) with JWT authentication.
 
----
-[![Demo CountPages alpha](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=ek1j272iAmc)
-
-
-
 ## Features
 - User authentication using JWT (Login, Refresh token)
 - CRUD operations for snippets
