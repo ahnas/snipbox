@@ -71,7 +71,7 @@ python manage.py runserver
 
 ### Authentication APIs
 #### 1. Login API
-**Endpoint:** `/api/token/`  
+**Endpoint:** `http://127.0.0.1:8000/api/token/`  
 **Method:** `POST`  
 **Request Body:**
 ```json
@@ -89,7 +89,7 @@ python manage.py runserver
 ```
 
 #### 2. Refresh Token API
-**Endpoint:** `/api/token/refresh/`  
+**Endpoint:** `http://127.0.0.1:8000/api/token/refresh/`  
 **Method:** `POST`  
 **Request Body:**
 ```json
@@ -128,7 +128,7 @@ python manage.py runserver
 ```
 
 #### 4. List Snippets
-**Endpoint:** `/snippets/`  
+**Endpoint:** `http://127.0.0.1:8000/api/snippets/`  
 **Method:** `GET`
 **Response:**
 ```json
@@ -144,23 +144,23 @@ python manage.py runserver
 ```
 
 #### 5. Snippet Detail
-**Endpoint:** `/snippets/{id}/`  
+**Endpoint:** `http://127.0.0.1:8000/api/snippets/{id}/`  
 **Method:** `GET`
 
 #### 6. Update Snippet
-**Endpoint:** `/snippets/{id}/`  
+**Endpoint:** `http://127.0.0.1:8000/api/snippets/{id}/`  
 **Method:** `PUT`
 
 #### 7. Delete Snippet
-**Endpoint:** `/snippets/{id}/`  
+**Endpoint:** `http://127.0.0.1:8000/api/snippets/{id}/`  
 **Method:** `DELETE`
 
 #### 8. List Tags
-**Endpoint:** `/tags/`  
+**Endpoint:** `http://127.0.0.1:8000/api/tags/`  
 **Method:** `GET`
 
 #### 9. Get Snippets by Tag
-**Endpoint:** `/tags/{id}/`  
+**Endpoint:** `http://127.0.0.1:8000/api/tags/{id}/`  
 **Method:** `GET`
 
 ---

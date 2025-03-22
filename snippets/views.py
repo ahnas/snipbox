@@ -57,10 +57,18 @@ class SnippetDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Snippet.objects.filter(user=self.request.user)
 
-class TagListView(generics.ListAPIView):
-    serializer_class = TagSerializer
-    permission_classes = [IsAuthenticated]
+class TagListView(generics.ListCreateAPIView):
     queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+    def post(self, request, *args, **kwargs):
+        title = request.data.get("title")
+        if not title:
+            return Response({"error": "Title is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        tag, created = Tag.objects.get_or_create(title=title)
+        return Response(TagSerializer(tag).data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
+    
 
 class TagDetailView(generics.ListAPIView):
     serializer_class = SnippetSerializer

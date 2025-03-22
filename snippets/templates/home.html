@@ -32,6 +32,10 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" id="title" class="form-control mb-2" placeholder="Title">
+                    <div class="mb-2">
+                        <input type="text" id="tag-search" class="form-control" placeholder="Search or add a tag..."
+                            oninput="filterTags()">
+                    </div>
                     <select id="tag-select" class="form-select mb-2" multiple></select>
                     <textarea id="note" class="form-control" placeholder="Note"></textarea>
                 </div>
@@ -109,8 +113,47 @@
                 headers: { "Authorization": "Bearer " + localStorage.getItem("access_token") }
             });
             const data = await response.json();
-            document.getElementById("tag-select").innerHTML = data.map(tag => `<option value='${tag.title}'>${tag.title}</option>`).join("");
+            window.allTags = data.map(tag => tag.title);
+            updateTagDropdown(allTags);
         }
+
+        function updateTagDropdown(tags) {
+            document.getElementById("tag-select").innerHTML = tags.length
+                ? tags.map(tag => `<option value="${tag}">${tag}</option>`).join("")
+                : `<option disabled>No tags found</option>`;
+        }
+
+        function filterTags() {
+            const searchTerm = document.getElementById("tag-search").value.toLowerCase();
+            const filteredTags = window.allTags.filter(tag => tag.toLowerCase().includes(searchTerm));
+
+            if (filteredTags.length) {
+                updateTagDropdown(filteredTags);
+            } else {
+                updateTagDropdown([`Create new tag: "${searchTerm}"`]);
+            }
+        }
+
+        document.getElementById("tag-search").addEventListener("change", async function () {
+            const newTag = this.value.trim();
+            if (newTag && !window.allTags.includes(newTag)) {
+                const response = await fetch("http://127.0.0.1:8000/api/tags/", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("access_token"),
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ title: newTag })
+                });
+
+                if (response.ok) {
+                    window.allTags.push(newTag);
+                    updateTagDropdown(window.allTags);
+                }
+            }
+        });
+
+        fetchTags();
 
         async function addSnippet() {
             const title = document.getElementById("title").value.trim();
