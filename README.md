@@ -1,6 +1,9 @@
-
+## Frontend
 ![frontend_workingCC](https://github.com/user-attachments/assets/58662da4-8f28-4008-aafc-80075a70ea65)
+
+## API Testing
 ![api_testingCC](https://github.com/user-attachments/assets/bde8e0a7-bc9c-40f7-8ddb-a83dbe10b750)
+
 # SnipBox Backend API
 
 ## Overview
