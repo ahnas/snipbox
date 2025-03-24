@@ -1,6 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Snippet, Tag
@@ -8,9 +8,19 @@ from .serializers import SnippetSerializer, TagSerializer
 from django.contrib.auth import authenticate
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.views import redirect_to_login
 
 
+class APIRootView(APIView):
+    permission_classes = [AllowAny] 
 
+    def get(self, request, format=None):
+        return Response({
+            "snippets": request.build_absolute_uri(reverse("snippet-list")),
+            "tags": request.build_absolute_uri(reverse("tag-list")),
+            "snippets-overview": request.build_absolute_uri(reverse("snippet-overview")),
+            "swagger": request.build_absolute_uri(reverse("swagger-ui")),
+        })
 
 class CustomLoginView(APIView):
     def post(self, request):
@@ -45,6 +55,11 @@ def home_page(request):
 class SnippetListCreateView(generics.ListCreateAPIView):
     serializer_class = SnippetSerializer
     permission_classes = [IsAuthenticated]
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect_to_login(request.get_full_path(), login_url='/admin/login/')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         return Snippet.objects.filter(user=self.request.user)

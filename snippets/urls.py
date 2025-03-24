@@ -1,8 +1,9 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import SnippetListCreateView, SnippetDetailView, TagListView, TagDetailView, CustomLoginView, SnippetOverviewAPIView
+from .views import SnippetListCreateView, SnippetDetailView, TagListView, TagDetailView, CustomLoginView, SnippetOverviewAPIView, APIRootView
 
 urlpatterns = [
+    path('', APIRootView.as_view(), name='api-root'),
     path('snippets/', SnippetListCreateView.as_view(), name='snippet-list'),
     path('snippets/<int:pk>/', SnippetDetailView.as_view(), name='snippet-detail'),
     path('tags/', TagListView.as_view(), name='tag-list'),
