@@ -25,7 +25,7 @@ SnipBox is a short note-saving app that lets users save short text snippets and 
 
 ### 1. Clone the repository
 ```bash
-git clone <repository_link>
+git clone https://github.com/ahnas/snipbox.git
 cd snipbox-backend
 ```
 
