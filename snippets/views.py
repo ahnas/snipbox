@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.views import redirect_to_login
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 
 class APIRootView(APIView):
@@ -22,6 +24,8 @@ class APIRootView(APIView):
             "swagger": request.build_absolute_uri(reverse("swagger-ui")),
         })
 
+
+@method_decorator(csrf_exempt, name="dispatch")
 class CustomLoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
